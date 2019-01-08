@@ -58,3 +58,20 @@ To sandbox python, use [CodeJail](https://github.com/edx/codejail). In your hand
 	}
 
 Then, `codejail_python` will automatically be added to the kwargs for your handler. You can then import codejail.jail_code and run `jail_code("python", code...)`. You can define multiple sandboxes and use them as in `jail_code("special-python", ...)`
+
+
+EPFL Setup
+=====
+
+```
+virtualenv -p /usr/local/bin/python2.7 venv
+source venv/bin/activate
+make install requirements
+make test
+```
+
+```
+python -m xqueue_watcher -d .
+```
+
+Here is Sandbox curse https://test-courseware.epfl.ch/courses/course-v1:EPFL+Sandbox01+x/courseware/2f40a30e24fc4ccc908919cc3a7e5a05/12256998e61c4523bf9bb1c7f59f0dbd/1?activate_block_id=block-v1%3AEPFL%2BSandbox01%2Bx%2Btype%40vertical%2Bblock%4065196331ded740808e50f621d15e885e
