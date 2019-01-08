@@ -1,14 +1,13 @@
 {
-    "test-123": {
-        "SERVER": "http://127.0.0.1:18040",
+    "epfl-sandbox": {
+        "SERVER": "https://http-basic-user:http-basic-password@xqueue.test-courseware.epfl.ch/",
         "CONNECTIONS": 1,
-        "AUTH": ["lms", "lms"],
+        "AUTH": ["lms", "password"],
         "HANDLERS": [
             {
-                "HANDLER": "xqueue_watcher.grader.Grader",
+                "HANDLER": "testGrader.test.testGrader",
                 "KWARGS": {
-                    "grader_root": "../data/6.00x/graders/",
-                    "gradepy": "../data/6.00x/graders/grade.py"
+                    "grader_root": "/tmp/grader"
                 }
             }
         ]
