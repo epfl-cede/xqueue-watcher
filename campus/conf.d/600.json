@@ -1,0 +1,15 @@
+{
+    "epfl-sandbox": {
+        "SERVER": "https://xqueue.courseware.epfl.ch/",
+        "CONNECTIONS": 1,
+        "AUTH": ["scala", "9MTsAd9BMYDe2dDP43ZP"],
+        "HANDLERS": [
+            {
+                "HANDLER": "testGrader.test.testGrader",
+                "KWARGS": {
+                    "grader_root": "/tmp/grader"
+                }
+            }
+        ]
+    }
+}

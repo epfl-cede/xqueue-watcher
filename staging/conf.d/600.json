@@ -1,8 +1,8 @@
 {
     "epfl-sandbox": {
-        "SERVER": "https://http-basic-user:http-basic-password@xqueue.test-courseware.epfl.ch/",
+        "SERVER": "https://admin:Mooc!1234@xqueue.test-courseware.epfl.ch/",
         "CONNECTIONS": 1,
-        "AUTH": ["lms", "password"],
+        "AUTH": ["scala", "9MTsAd9BMYDe2dDP43ZP"],
         "HANDLERS": [
             {
                 "HANDLER": "testGrader.test.testGrader",
