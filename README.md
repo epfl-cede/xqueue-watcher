@@ -7,7 +7,7 @@ This is an implementation of a polling [XQueue](https://github.com/edx/xqueue) c
 Running
 =======
 
-`python -m xqueue_watcher -d [path to settings directory]`
+`python -m xqueue_watcher -d staging`
 
 
 JSON configuration file
