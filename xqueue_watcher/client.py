@@ -143,7 +143,7 @@ class XQueueClient(object):
             if result:
                 reply = {'xqueue_body': json.dumps(result),
                          'xqueue_header': content['xqueue_header']}
-                status, message = self._request('post', '/xqueue/put_result/', data=reply, verify=False)
+                status, message = self._request('post', 'xqueue/put_result/', data=reply, verify=False)
                 if not status:
                     log.error('Failure for %r -> %r', reply, message)
                 success.append(status)
@@ -153,11 +153,23 @@ class XQueueClient(object):
         try:
             self.processing = False
             get_params = {'queue_name': self.queue_name}
-            success, content = self._request('get', '/xqueue/get_submission/', params=get_params)
+            success, content = self._request('get', 'xqueue/get_submission/', params=get_params)
             if success:
                 self.processing = True
                 success = self._handle_submission(content)
             return success
+        except requests.exceptions.Timeout:
+            return True
+        except Exception as e:
+            log.exception(e.message)
+            return True
+
+    def get_queuelen(self):
+        try:
+            get_params = {'queue_name': self.queue_name}
+            success, content = self._request('get', 'xqueue/get_queuelen/', params=get_params)
+            log.debug("success={}; queue length={}".format(success, content))
+            return True
         except requests.exceptions.Timeout:
             return True
         except Exception as e:
@@ -183,8 +195,9 @@ class XQueueClient(object):
                 else:
                     break
         while self.running:
-            if not self.process_one():
-                time.sleep(self.poll_interval)
+            if self.get_queuelen():
+                if not self.process_one():
+                    time.sleep(self.poll_interval)
         return True
 
 

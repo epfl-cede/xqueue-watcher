@@ -111,8 +111,7 @@ class Grader(object):
     def process_item(self, content, queue=None):
         try:
             body = content['xqueue_body']
-            files = content['xqueue_files']
-            self.log.debug("incommig files: {}".format(files))
+            income_files = content['xqueue_files']
 
             # Delivery from the lms
             body = json.loads(body)
@@ -127,11 +126,11 @@ class Grader(object):
                 self.log.debug("error parsing: '{0}' -- {1}".format(payload, err))
                 raise
 
-            self.log.debug("Processing submission, grader payload: {0}".format(payload))
+            self.log.debug("Processing submission, grader payload: {0}; files: {1}".format(payload, income_files))
             relative_grader_path = grader_config['grader']
             grader_path = (self.grader_root / relative_grader_path).abspath()
             start = time.time()
-            results = self.grade(grader_path, grader_config, student_response)
+            results = self.grade(grader_path, grader_config, student_response, income_files)
 
 
             # Make valid JSON message
