@@ -154,6 +154,7 @@ class XQueueClient(object):
             self.processing = False
             get_params = {'queue_name': self.queue_name}
             success, content = self._request('get', 'xqueue/get_submission/', params=get_params)
+            log.debug("success={}; content={}".format(success, content))
             if success:
                 self.processing = True
                 success = self._handle_submission(content)
@@ -168,7 +169,7 @@ class XQueueClient(object):
         try:
             get_params = {'queue_name': self.queue_name}
             success, content = self._request('get', 'xqueue/get_queuelen/', params=get_params)
-            log.debug("success={}; queue length={}".format(success, content))
+            log.debug("success={}; content={}".format(success, content))
             return True
         except requests.exceptions.Timeout:
             return True
