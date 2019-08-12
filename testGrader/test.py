@@ -6,7 +6,8 @@ class testGrader(Grader):
         files = json.loads(files)
         errors = []
         files_access = []
-        for name, url in files.iteritems():
+        for name in files:
+            url = files[name]
             response = requests.get(url)
             if response.status_code != 200:
                 errors.append("File {} access error: {}".format(url, response.status_code))

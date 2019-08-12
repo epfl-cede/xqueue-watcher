@@ -6,7 +6,7 @@ import sys
 import cgi
 import time
 import json
-from path import path
+from path import Path
 import logging
 import multiprocessing
 
@@ -87,7 +87,7 @@ class Grader(object):
         logger_name = name of logger
         """
         self.log = logging.getLogger(logger_name)
-        self.grader_root = path(grader_root)
+        self.grader_root = Path(grader_root)
 
         self.fork_per_item = fork_per_item
 

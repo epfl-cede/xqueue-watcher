@@ -5,7 +5,7 @@ import requests
 from requests.auth import HTTPBasicAuth
 import threading
 import multiprocessing
-from settings import MANAGER_CONFIG_DEFAULTS
+from .settings import MANAGER_CONFIG_DEFAULTS
 
 log = logging.getLogger(__name__)
 
@@ -162,7 +162,7 @@ class XQueueClient(object):
         except requests.exceptions.Timeout:
             return True
         except Exception as e:
-            log.exception(e.message)
+            log.exception(e)
             return True
 
     def get_queuelen(self):

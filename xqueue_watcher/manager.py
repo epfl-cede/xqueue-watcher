@@ -8,18 +8,18 @@ import inspect
 import json
 import logging
 import logging.config
-from path import path
+from path import Path
 import signal
 import sys
 import time
 
-import codejail
+#import codejail
 
-from settings import get_manager_config_values, MANAGER_CONFIG_DEFAULTS
+from .settings import get_manager_config_values, MANAGER_CONFIG_DEFAULTS
 
 CODEJAIL_LANGUAGES = {
-    'python2': codejail.languages.python2,
-    'python3': codejail.languages.python3,
+    #'python2': codejail.languages.python2,
+    #'python3': codejail.languages.python3,
 }
 
 
@@ -57,9 +57,9 @@ class Manager(object):
             kw = handler_config.get('KWARGS', {})
 
             # codejail configuration per handler
-            codejail_config = handler_config.get("CODEJAIL", None)
-            if codejail_config:
-                kw['codejail_python'] = self.enable_codejail(codejail_config)
+            #codejail_config = handler_config.get("CODEJAIL", None)
+            #if codejail_config:
+            #    kw['codejail_python'] = self.enable_codejail(codejail_config)
 
             handler = getattr(module, classname)
             if kw or inspect.isclass(handler):
@@ -83,7 +83,7 @@ class Manager(object):
         and one or more queue configurations from a conf.d
         directory relative to the config_root
         """
-        directory = path(directory)
+        directory = Path(directory)
 
         log_config = directory / 'logging.json'
         if log_config.exists():
@@ -120,12 +120,12 @@ class Manager(object):
         name = codejail_config["name"]
         bin_path = codejail_config['bin_path']
         user = codejail_config.get('user', getpass.getuser())
-        lang = CODEJAIL_LANGUAGES.get(codejail_config.get('lang'), codejail.languages.other)
-        codejail.configure(name, bin_path, user=user, lang=lang)
-        limits = codejail_config.get("limits", {})
-        for name, value in limits.items():
-            codejail.limits.set_limit(name, value)
-        self.log.info("configured codejail -> %s %s %s", name, bin_path, user)
+        #lang = CODEJAIL_LANGUAGES.get(codejail_config.get('lang'), codejail.languages.other)
+        #codejail.configure(name, bin_path, user=user, lang=lang)
+        #limits = codejail_config.get("limits", {})
+        #for name, value in limits.items():
+        #    codejail.limits.set_limit(name, value)
+        #self.log.info("configured codejail -> %s %s %s", name, bin_path, user)
         return name
 
     def start(self):
