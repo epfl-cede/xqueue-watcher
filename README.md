@@ -8,7 +8,9 @@ Running
 =======
 
 ```
+python3 -mvenv venv
 source venv/bin/activate
+pip instal -r requirements/production.txt
 python -m xqueue_watcher -d staging/
 ```
 
