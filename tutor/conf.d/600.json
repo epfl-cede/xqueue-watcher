@@ -2,7 +2,7 @@
     "openedx": {
         "SERVER": "http://xqueue.local.overhang.io/",
         "CONNECTIONS": 1,
-        "AUTH": ["openedx", "p@ssd0rd"],
+        "AUTH": ["openedx", "p@ssw0rd"],
         "HANDLERS": [
             {
                 "HANDLER": "testGrader.tutor.tutorGrader",
