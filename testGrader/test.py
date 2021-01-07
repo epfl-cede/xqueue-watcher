@@ -2,7 +2,7 @@ import json, requests
 from xqueue_watcher.grader import Grader
 
 class testGrader(Grader):
-    def grade(self, grader_path, grader_config, student_response, files):
+    def grade(self, student_response, files):
         files = json.loads(files)
         errors = []
         files_access = []

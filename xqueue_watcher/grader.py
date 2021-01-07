@@ -3,7 +3,7 @@ Implementation of a grader compatible with XServer
 """
 import imp
 import sys
-import cgi
+import html
 import time
 import json
 from path import Path
@@ -12,7 +12,7 @@ import multiprocessing
 
 
 def format_errors(errors):
-    esc = cgi.escape
+    esc = html.escape
     error_string = ''
     error_list = [esc(e) for e in errors or []]
     if error_list:
@@ -25,7 +25,7 @@ def format_errors(errors):
 def to_dict(result):
     # long description may or may not be provided.  If not, don't display it.
     # TODO: replace with mako template
-    esc = cgi.escape
+    esc = html.escape
     if result[1]:
         long_desc = u'<p>{0}</p>'.format(esc(result[1]))
     else:
@@ -105,7 +105,7 @@ class Grader(object):
         else:
             return self.process_item(content)
 
-    def grade(self, grader_path, grader_config, student_response):
+    def grade(self, student_response):
         raise NotImplementedError("no grader defined")
 
     def process_item(self, content, queue=None):
@@ -117,20 +117,10 @@ class Grader(object):
             body = json.loads(body)
             student_response = body['student_response']
             payload = body['grader_payload']
-            try:
-                grader_config = json.loads(payload)
-            except ValueError as err:
-                # If parsing json fails, erroring is fine--something is wrong in the content.
-                # However, for debugging, still want to see what the problem is
-
-                self.log.debug("error parsing: '{0}' -- {1}".format(payload, err))
-                raise
 
             self.log.debug("Processing submission, grader payload: {0}; files: {1}".format(payload, income_files))
-            relative_grader_path = grader_config['grader']
-            grader_path = (self.grader_root / relative_grader_path).abspath()
             start = time.time()
-            results = self.grade(grader_path, grader_config, student_response, income_files)
+            results = self.grade(student_response, income_files)
 
 
             # Make valid JSON message

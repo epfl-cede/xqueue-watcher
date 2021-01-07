@@ -1,11 +1,11 @@
 {
-    "epfl-scala-prod": {
-        "SERVER": "https://xqueue.courseware.epfl.ch/",
+    "openedx": {
+        "SERVER": "http://xqueue.local.overhang.io/",
         "CONNECTIONS": 1,
-        "AUTH": ["scala", "9MTsAd9BMYDe2dDP43ZP"],
+        "AUTH": ["openedx", "p@ssd0rd"],
         "HANDLERS": [
             {
-                "HANDLER": "testGrader.test.testGrader",
+                "HANDLER": "testGrader.tutor.tutorGrader",
                 "KWARGS": {
                     "grader_root": "/tmp/grader"
                 }
