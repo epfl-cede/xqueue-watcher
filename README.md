@@ -11,7 +11,7 @@ Running
 python3 -mvenv venv
 source venv/bin/activate
 pip install -r requirements/production.txt
-python -m xqueue_watcher -d staging/
+python -m xqueue_watcher -d conf/staging/
 ```
 
 

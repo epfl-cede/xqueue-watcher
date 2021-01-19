@@ -1,0 +1,15 @@
+{
+    "openedx": {
+        "SERVER": "https://xqueue.university.test-swissmooc.ch/",
+        "CONNECTIONS": 1,
+        "AUTH": ["openedx", "p@ssw0rd"],
+        "HANDLERS": [
+            {
+                "HANDLER": "testGrader.tutor.tutorGrader",
+                "KWARGS": {
+                    "grader_root": "/tmp/grader"
+                }
+            }
+        ]
+    }
+}
